@@ -1,6 +1,9 @@
 package moe.seikimo.magixbot.utils;
 
+import moe.seikimo.magixbot.MagixBot;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Guild;
+import org.jetbrains.annotations.Nullable;
 
 public interface JDAUtils {
     /**
@@ -19,5 +22,18 @@ public interface JDAUtils {
             case "competing" -> Activity.competing(name);
             default -> throw new IllegalArgumentException("Invalid activity.");
         };
+    }
+
+    /**
+     * Fetches a guild by its ID.
+     *
+     * @param id The guild ID.
+     * @return The guild.
+     */
+    @Nullable
+    static Guild getGuild(String id) {
+        return MagixBot.getInstance()
+                .getBotInstance()
+                .getGuildById(id);
     }
 }

@@ -2,6 +2,7 @@ package moe.seikimo.magixbot;
 
 import lombok.Getter;
 import moe.seikimo.console.Arguments;
+import moe.seikimo.magixbot.data.DatabaseManager;
 import moe.seikimo.magixbot.listeners.GenericListener;
 import moe.seikimo.magixbot.utils.JDAUtils;
 import net.dv8tion.jda.api.JDA;
@@ -48,6 +49,9 @@ public final class MagixBot {
         try {
             // Start the bot.
             this.start();
+
+            // Initialize systems.
+            DatabaseManager.initialize();
         } catch (Exception ex) {
             MagixBot.getLogger().error("Unable to start the bot.", ex);
         }
