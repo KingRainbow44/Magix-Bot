@@ -36,4 +36,14 @@ public interface JDAUtils {
                 .getBotInstance()
                 .getGuildById(id);
     }
+
+    /**
+     * @return The URL to the bot's profile picture.
+     */
+    static String getIconUrl() {
+        return MagixBot.getInstance()
+                .getBotInstance()
+                .getSelfUser()
+                .getAvatarUrl();
+    }
 }
