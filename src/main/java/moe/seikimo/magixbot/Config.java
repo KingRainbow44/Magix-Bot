@@ -57,10 +57,17 @@ public final class Config {
     }
 
     private String token = "your-token-here";
+    private Logger logger = new Logger();
     private Commands commands = new Commands();
     private BotActivity activity = new BotActivity();
     private Database database = new Database();
     private Bot bot = new Bot();
+
+    @Getter
+    @Accessors(fluent = true)
+    public static class Logger {
+        private boolean debug = true;
+    }
 
     @Getter
     @Accessors(fluent = true)
