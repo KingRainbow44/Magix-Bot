@@ -5,13 +5,13 @@ import moe.seikimo.magixbot.features.game.type.WordChain;
 import net.dv8tion.jda.api.entities.Guild;
 import tech.xigam.cch.utils.Interaction;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 public final class GameManager {
     private static final Map<String, Class<? extends Game>> games = new HashMap<>();
 
+    @Getter private static final Map<String, String> gameNames = new HashMap<>();
     @Getter private static final Map<Guild, Game> running = new HashMap<>();
 
     /**
@@ -19,6 +19,7 @@ public final class GameManager {
      */
     public static void initialize() {
         games.put("word-chain", WordChain.class);
+        gameNames.put("word-chain", "Word Chain");
     }
 
     /**
@@ -43,13 +44,5 @@ public final class GameManager {
         } catch (Exception ignored) {
             return null;
         }
-    }
-
-    /**
-     * @return A collection of available games.
-     *
-     */
-    public static Collection<String> getAvailableGames() {
-        return games.keySet();
     }
 }

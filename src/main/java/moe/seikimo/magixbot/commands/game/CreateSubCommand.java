@@ -52,10 +52,12 @@ public final class CreateSubCommand extends SubCommand implements Completable, A
         var input = completion.getInput().toLowerCase();
 
         // Get similar options.
-        var other = GameManager.getAvailableGames();
-        for (var game : other) {
-            if (game.startsWith(input)) {
-                completion.addChoice(game, game);
+        var other = GameManager.getGameNames();
+        for (var game : other.entrySet()) {
+            var key = game.getKey();
+            var value = game.getValue();
+            if (key.startsWith(input)) {
+                completion.addChoice(value, key);
             }
         }
 
