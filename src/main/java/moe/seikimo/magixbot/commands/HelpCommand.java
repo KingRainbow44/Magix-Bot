@@ -5,6 +5,7 @@ import moe.seikimo.magixbot.MagixBot;
 import moe.seikimo.magixbot.utils.EmbedUtils;
 import moe.seikimo.magixbot.utils.JDAUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import tech.xigam.cch.command.Command;
 import tech.xigam.cch.utils.Interaction;
 
@@ -27,6 +28,8 @@ public final class HelpCommand extends Command {
                 .getCommandHandler().getRegisteredCommands();
         var prefix = Config.get().getCommands().prefix();
         for (var entry : commands.entrySet()) {
+            if (entry.getValue().commandType() != Type.SLASH) continue;
+
             embed.addField(
                     prefix + entry.getKey(),
                     entry.getValue().getDescription(),
