@@ -32,7 +32,7 @@
         <dependency>
             <groupId>tech.xigam</groupId>
             <artifactId>CCH</artifactId>
-            <version>1.7.0</version>
+            <version>1.7.1</version>
         </dependency>
 
         <!-- Utilities -->
@@ -58,6 +58,19 @@
             <groupId>systems.manifold</groupId>
             <artifactId>manifold-ext</artifactId>
             <version>2024.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.10.2</version>
+
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- Data Storage -->
