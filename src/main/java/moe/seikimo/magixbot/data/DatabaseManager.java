@@ -37,10 +37,5 @@ public final class DatabaseManager {
         var client = MongoClients.create(this.server.getConnectionString());
         this.datastore = Morphia.createDatastore(client);
         DatabaseUtils.DATASTORE.set(this.datastore);
-
-        // Map known database models.
-        this.datastore.getMapper().getConfig()
-                .uuidRepresentation(UuidRepresentation.STANDARD)
-                .packages(List.of("moe.seikimo.data.models"));
     }
 }
