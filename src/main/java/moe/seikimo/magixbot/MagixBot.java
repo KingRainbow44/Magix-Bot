@@ -5,6 +5,7 @@ import moe.seikimo.console.Arguments;
 import moe.seikimo.magixbot.data.DatabaseManager;
 import moe.seikimo.magixbot.listeners.GenericListener;
 import moe.seikimo.magixbot.utils.JDAUtils;
+import moe.seikimo.magixbot.utils.ReflectionUtils;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -77,8 +78,13 @@ public final class MagixBot {
         this.botInstance = builder.build();
 
         // Enable CCH.
-        this.commandHandler = new ComplexCommandHandler(commands.enabled());
+        this.commandHandler = new ComplexCommandHandler(commands.prefixEnabled());
         this.commandHandler.setPrefix(commands.prefix());
         this.commandHandler.setJda(this.botInstance);
+        this.commandHandler.mentionDefault = false;
+
+        // Register commands.
+        ReflectionUtils.getAllCommands().forEach(
+                this.commandHandler::registerCommand);
     }
 }

@@ -5,12 +5,12 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.experimental.Accessors;
 import moe.seikimo.general.EncodingUtils;
-import net.dv8tion.jda.api.interactions.commands.build.Commands;
 
 import java.io.File;
 import java.nio.file.Files;
 
 @Data
+@SuppressWarnings("FieldMayBeFinal")
 public final class Config {
     private static Config instance = new Config();
 
@@ -59,11 +59,12 @@ public final class Config {
     private Commands commands = new Commands();
     private BotActivity activity = new BotActivity();
     private Database database = new Database();
+    private Bot bot = new Bot();
 
     @Getter
     @Accessors(fluent = true)
     public static class Commands {
-        private boolean enabled = true;
+        private boolean prefixEnabled = true;
         private String prefix = "m!";
     }
 
@@ -78,5 +79,11 @@ public final class Config {
     @Accessors(fluent = true)
     public static class Database {
         private int port = 27018;
+    }
+
+    @Getter
+    @Accessors(fluent = true)
+    public static class Bot {
+        private String color = "#FFFFFF";
     }
 }
