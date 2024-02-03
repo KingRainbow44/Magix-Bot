@@ -26,4 +26,17 @@ public interface EmbedUtils {
                 .setDescription(content)
                 .build();
     }
+
+    /**
+     * Creates a basic error embed.
+     *
+     * @param content The content of the embed.
+     * @return The embed.
+     */
+    static MessageEmbed error(String content) {
+        return new EmbedBuilder()
+                .setColor(0xfc5e53)
+                .setDescription(content)
+                .build();
+    }
 }

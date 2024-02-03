@@ -12,6 +12,7 @@ import java.nio.file.Files;
 @Data
 @SuppressWarnings("FieldMayBeFinal")
 public final class Config {
+    public static String fileName = "config.json";
     private static Config instance = new Config();
 
     /**
@@ -26,7 +27,7 @@ public final class Config {
      */
     @SneakyThrows
     public static void load(String fileName) {
-        var configFile = new File(fileName);
+        var configFile = new File(Config.fileName = fileName);
 
         if (!configFile.exists()) {
             // Save this configuration.
@@ -85,5 +86,6 @@ public final class Config {
     @Accessors(fluent = true)
     public static class Bot {
         private String color = "#FFFFFF";
+        private String ownerId = "252090676068614145";
     }
 }
