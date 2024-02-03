@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Main-Class: moe.seikimo.magixbot.MagixBot
+Class-Path: libs/jackson-annotations-2.16.0.jar libs/byte-buddy-1.14.9.jar libs/mongodb
+ -driver-legacy-4.11.1.jar libs/okio-3.6.0.jar libs/netty-resolver-4.1.94.Final.ja
+ r smallrye-config-3.4.4.jar libs/netty-common-4.1.94.Final.jar libs/h2-2.1.214.ja
+ r classgraph-4.8.164.jar libs/slf4j-api-2.0.7.jar libs/smallrye-config-common-3.4
+ .4.jar libs/smallrye-common-annotation-2.2.0.jar libs/jsr305-3.0.2.jar libs/mongo-java
+ -server-h2-backend-1.44.0.jar libs/netty-transport-4.1.94.Final.jar libs/netty-tr
+ ansport-native-unix-common-4.1.94.Final.jar libs/mongo-java-server-memory-ba
+ ckend-1.44.0.jar libs/kotlin-stdlib-1.8.21.jar libs/jackson-core-2.16.0.jar libs/jacks
+ on-databind-2.16.0.jar libs/kotlin-stdlib-jdk7-1.8.21.jar libs/jboss-logging-3.5.
+ 3.Final.jar libs/magix-console-1.0-SNAPSHOT.jar libs/okhttp-4.12.0.jar libs/commons-co
+ llections4-4.4.jar libs/morphia-core-2.4.8.jar libs/jna-4.4.0.jar libs/magix-common-1.
+ 0-SNAPSHOT.jar libs/mongodb-driver-core-4.11.1.jar libs/smallrye-common-classload
+ er-2.2.0.jar libs/bson-record-codec-4.11.1.jar libs/JDA-5.0.0-beta.20.jar libs/lombok-
+ 1.18.30.jar libs/opus-java-natives-1.1.1.jar libs/okio-jvm-3.6.0.jar libs/smallrye-con
+ fig-core-3.4.4.jar libs/mongo-java-server-1.44.0.jar libs/annotations-13.0.jar libs/bs
+ on-4.11.1.jar libs/opus-java-1.1.1.jar libs/smallrye-common-function-2.2.0.jar libs/lo
+ gback-classic-1.4.8.jar libs/CCH-1.7.0.jar libs/jsoup-1.16.2.jar libs/spotbugs-annotat
+ ions-4.8.1.jar libs/nv-websocket-client-2.14.jar libs/microprofile-config-api-3.0
+ .3.jar libs/mongodb-driver-sync-4.11.1.jar libs/netty-buffer-4.1.94.Final.jar libs/net
+ ty-codec-4.1.94.Final.jar libs/smallrye-common-expression-2.2.0.jar libs/trove4j-
+ 3.0.3.jar libs/logback-core-1.4.8.jar libs/kotlin-stdlib-common-1.9.10.jar libs/mongo-
+ java-server-core-1.44.0.jar libs/netty-handler-4.1.94.Final.jar libs/smallrye-com
+ mon-constraint-2.2.0.jar libs/asm-9.5.jar libs/kotlin-stdlib-jdk8-1.8.21.jar libs/opus
+ -java-api-1.1.1.jar libs/gson-2.9.0.jar
