@@ -8,7 +8,17 @@ import net.dv8tion.jda.api.entities.Guild;
 
 @Extension
 public final class GuildExt {
+    /**
+     * @return The guild model, from the database or a new instance.
+     */
     public static GuildModel getData(@This Guild guild) {
-        return DatabaseUtils.fetch(GuildModel.class, "guildId", guild.getId());
+        var data = DatabaseUtils.fetch(
+                GuildModel.class, "guildId", guild.getId());
+        if (data == null) {
+            data = new GuildModel();
+            data.setGuildId(guild.getId());
+        }
+
+        return data;
     }
 }
