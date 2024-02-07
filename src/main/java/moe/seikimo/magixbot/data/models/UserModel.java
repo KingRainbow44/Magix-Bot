@@ -8,7 +8,7 @@ import moe.seikimo.data.DatabaseObject;
 import moe.seikimo.general.JObject;
 
 @Data
-@Entity
+@Entity("users")
 /* UserModel is used for global users. (does not include guilds) */
 public final class UserModel implements DatabaseObject<UserModel> {
     @Id private String userId;

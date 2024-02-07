@@ -3,7 +3,6 @@ package moe.seikimo.magixbot.data.models;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.PostLoad;
 import lombok.Data;
-import moe.seikimo.magixbot.features.game.GameStatistics;
 
 @Data
 @Entity

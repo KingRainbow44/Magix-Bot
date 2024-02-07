@@ -5,7 +5,7 @@ import manifold.ext.rt.api.This;
 import moe.seikimo.data.DatabaseUtils;
 import moe.seikimo.magixbot.data.models.MemberModel;
 import moe.seikimo.magixbot.data.models.UserModel;
-import moe.seikimo.magixbot.features.game.GameStatistics;
+import moe.seikimo.magixbot.data.models.GameStatistics;
 import net.dv8tion.jda.api.entities.Member;
 
 @Extension

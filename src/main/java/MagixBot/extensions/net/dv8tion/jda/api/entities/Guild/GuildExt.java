@@ -17,6 +17,7 @@ public final class GuildExt {
         if (data == null) {
             data = new GuildModel();
             data.setGuildId(guild.getId());
+            data.save();
         }
 
         return data;
