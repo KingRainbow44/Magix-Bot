@@ -4,6 +4,7 @@ import moe.seikimo.magixbot.MagixBot;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Guild;
 import org.jetbrains.annotations.Nullable;
+import tech.xigam.cch.utils.Interaction;
 
 public interface JDAUtils {
     /**
@@ -45,5 +46,20 @@ public interface JDAUtils {
                 .getBotInstance()
                 .getSelfUser()
                 .getAvatarUrl();
+    }
+
+    /**
+     * Automatic reply for commands that can only be used in a guild.
+     *
+     * @param interaction The interaction.
+     * @return True if the command can be used, false otherwise.
+     */
+    static boolean isNotFromGuild(Interaction interaction) {
+        if (!interaction.isFromGuild()) {
+            interaction.reply(EmbedUtils.error("This command can only be used in a guild."));
+            return false;
+        }
+
+        return true;
     }
 }

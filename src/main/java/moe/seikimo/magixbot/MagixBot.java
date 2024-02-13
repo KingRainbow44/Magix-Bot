@@ -1,8 +1,10 @@
 package moe.seikimo.magixbot;
 
+import ch.qos.logback.classic.Level;
 import lombok.Getter;
 import moe.seikimo.console.Arguments;
 import moe.seikimo.magixbot.data.DatabaseManager;
+import moe.seikimo.magixbot.features.game.GameManager;
 import moe.seikimo.magixbot.listeners.GenericListener;
 import moe.seikimo.magixbot.utils.JDAUtils;
 import moe.seikimo.magixbot.utils.ReflectionUtils;
@@ -41,6 +43,14 @@ public final class MagixBot {
     private MagixBot(Arguments arguments) {
         Config.load(arguments.get("config", "config.json"));
 
+        // Check if debug mode is enabled.
+        if (Config.get().getLogger().debug()) {
+            var logger = (ch.qos.logback.classic.Logger) MagixBot.logger;
+            logger.setLevel(Level.DEBUG);
+
+            MagixBot.getLogger().debug("Debug mode is enabled.");
+        }
+
         // Check if the config is valid.
         if (Config.get().getToken().equals("your-token-here")) {
             MagixBot.getLogger().error("Please set your token in the config.");
@@ -53,6 +63,7 @@ public final class MagixBot {
 
             // Initialize systems.
             DatabaseManager.initialize();
+            GameManager.initialize();
         } catch (Exception ex) {
             MagixBot.getLogger().error("Unable to start the bot.", ex);
         }
@@ -84,7 +95,9 @@ public final class MagixBot {
         this.commandHandler.mentionDefault = false;
 
         // Register commands.
-        ReflectionUtils.getAllCommands().forEach(
-                this.commandHandler::registerCommand);
+        ReflectionUtils.getAllCommands().forEach(command -> {
+            this.commandHandler.registerCommand(command);
+            MagixBot.getLogger().debug("Registered command: '{}'", command.getLabel());
+        });
     }
 }
