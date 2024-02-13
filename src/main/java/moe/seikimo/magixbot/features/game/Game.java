@@ -5,15 +5,18 @@ import lombok.RequiredArgsConstructor;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.LinkedList;
 import java.util.List;
 
+@Getter
 @RequiredArgsConstructor
-public abstract class Game {
-    @Getter private boolean running = false;
+public abstract class Game extends ListenerAdapter {
+    private boolean running = false;
 
-    @Getter private final GameContext context;
+    private final GameContext context;
+    private final Thread gameThread = new Thread(this::run);
     private final List<Member> players = new LinkedList<>();
 
     /**
@@ -41,6 +44,7 @@ public abstract class Game {
      */
     public void start() {
         this.running = true;
+        this.gameThread.start();
     }
 
     /**
@@ -54,6 +58,13 @@ public abstract class Game {
 
         // Remove the game from the manager.
         GameManager.getRunning().remove(this.context.guild());
+    }
+
+    /**
+     * The game loop.
+     */
+    protected void run() {
+
     }
 
     /**

@@ -5,6 +5,7 @@ import lombok.Getter;
 import moe.seikimo.console.Arguments;
 import moe.seikimo.magixbot.data.DatabaseManager;
 import moe.seikimo.magixbot.features.game.GameManager;
+import moe.seikimo.magixbot.listeners.GameListener;
 import moe.seikimo.magixbot.listeners.GenericListener;
 import moe.seikimo.magixbot.utils.JDAUtils;
 import moe.seikimo.magixbot.utils.ReflectionUtils;
@@ -84,7 +85,7 @@ public final class MagixBot {
                 .setActivity(JDAUtils.createActivity(
                         activity.activity(), activity.name()))
                 .enableCache(CacheFlag.ACTIVITY, CacheFlag.ONLINE_STATUS)
-                .addEventListeners(new GenericListener());
+                .addEventListeners(new GenericListener(), new GameListener());
 
         this.botInstance = builder.build();
 
