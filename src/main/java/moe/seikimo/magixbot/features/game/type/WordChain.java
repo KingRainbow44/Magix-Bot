@@ -73,9 +73,10 @@ public final class WordChain extends Game {
         if (force) {
             this.thread.delete().queue();
         } else {
+            var winner = this.remaining.get(0);
             this.thread.sendMessageEmbeds(
                     EmbedUtils.error("The game has ended!"),
-                    EmbedUtils.info("The winner is " + this.remaining.get(0).getAsMention() + "!"),
+                    EmbedUtils.info("The winner is " + winner.getAsMention() + "!"),
                     EmbedUtils.info("The word chain was: " + String.join(", ", this.wordChain))
             ).queue();
 
@@ -83,6 +84,8 @@ public final class WordChain extends Game {
                     .setArchived(true)
                     .setLocked(true)
                     .queue();
+
+            winner.getStats(this.getGuild()).addWordChainWin();
         }
 
         super.stop(force);

@@ -28,6 +28,7 @@ public final class GuildModel implements DatabaseObject<GuildModel> {
     public JsonObject explain() {
         return JObject.c()
                 .add("guildId", this.getGuildId())
+                .add("clipDuration", this.getClipDuration())
                 .gson();
     }
 }
