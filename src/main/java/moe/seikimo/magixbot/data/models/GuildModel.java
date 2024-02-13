@@ -15,6 +15,8 @@ import net.dv8tion.jda.api.entities.Guild;
 public final class GuildModel implements DatabaseObject<GuildModel> {
     @Id private String guildId;
 
+    private int clipDuration = 300;
+
     private transient Guild guild;
 
     @PostLoad
