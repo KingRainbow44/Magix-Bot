@@ -22,7 +22,7 @@ public interface ReflectionUtils {
         for (var commandClass : reflector.getSubTypesOf(Command.class)) try {
             if (commandClass.isMemberClass() ||
                     Modifier.isAbstract(commandClass.getModifiers()) ||
-                    commandClass.isAssignableFrom(SubCommand.class)) continue;
+                    SubCommand.class.isAssignableFrom(commandClass)) continue;
             instances.add(commandClass.getDeclaredConstructor().newInstance());
         } catch (Exception exception) {
             logger.warn("Unable to create an instance of " + commandClass.getName(), exception);
