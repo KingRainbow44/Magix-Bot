@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import tech.xigam.cch.command.Command;
 import tech.xigam.cch.command.SubCommand;
 
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -19,10 +20,12 @@ public interface ReflectionUtils {
     static Collection<Command> getAllCommands() {
         var instances = new ArrayList<Command>();
         for (var commandClass : reflector.getSubTypesOf(Command.class)) try {
-            if (commandClass.isMemberClass() || commandClass.isAssignableFrom(SubCommand.class)) continue;
+            if (commandClass.isMemberClass() ||
+                    Modifier.isAbstract(commandClass.getModifiers()) ||
+                    commandClass.isAssignableFrom(SubCommand.class)) continue;
             instances.add(commandClass.getDeclaredConstructor().newInstance());
-        } catch (Exception ignored) {
-            logger.warn("Unable to create an instance of " + commandClass.getName());
+        } catch (Exception exception) {
+            logger.warn("Unable to create an instance of " + commandClass.getName(), exception);
         }
 
         return instances;
