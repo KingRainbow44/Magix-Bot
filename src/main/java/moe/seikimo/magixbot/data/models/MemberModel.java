@@ -1,40 +1,31 @@
 package moe.seikimo.magixbot.data.models;
 
-import com.google.gson.JsonObject;
 import dev.morphia.annotations.Entity;
-import dev.morphia.annotations.Id;
 import dev.morphia.annotations.PostLoad;
 import lombok.Data;
-import moe.seikimo.data.DatabaseObject;
-import moe.seikimo.general.JObject;
 import moe.seikimo.magixbot.features.game.GameStatistics;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Data
 @Entity
-public final class MemberModel implements DatabaseObject<GuildModel> {
-    @Id private String userId;
+/* MemberModel is used for guild-scoped users. (not global) */
+public final class MemberModel {
+    private transient GuildModel guild;
 
-    private Map<String, GameStatistics> gameStats;
-
-    @Override
-    public JsonObject explain() {
-        return JObject.c()
-                .add("userId", this.getUserId())
-                .add("gameStats", this.getGameStats())
-                .gson();
-    }
+    private GameStatistics gameStats;
 
     @PostLoad
     public void onLoad() {
-        var gameStats = this.getGameStats();
-        if (gameStats == null) {
-            gameStats = this.gameStats = new HashMap<>();
-            this.save();
+        if (this.getGameStats() == null) {
+            this.setGameStats(new GameStatistics());
         }
 
-        gameStats.forEach((key, value) -> value.setMember(this));
+        this.getGameStats().setMember(this);
+    }
+
+    /**
+     * Saves this model to the database.
+     */
+    public void save() {
+        this.getGuild().save();
     }
 }

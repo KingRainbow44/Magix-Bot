@@ -85,7 +85,7 @@ public final class WordChain extends Game {
                     .setLocked(true)
                     .queue();
 
-            winner.getStats(this.getGuild()).addWordChainWin();
+            winner.getStats().addWordChainWin();
         }
 
         super.stop(force);
