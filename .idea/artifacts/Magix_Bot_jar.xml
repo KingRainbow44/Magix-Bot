@@ -2,12 +2,7 @@
   <artifact name="Magix-Bot:jar">
     <output-path>$PROJECT_DIR$/dist</output-path>
     <root id="root">
-      <element id="archive" name="Magix-Bot.jar">
-        <element id="module-output" name="Magix-Bot" />
-      </element>
       <element id="directory" name="libs">
-        <element id="library" level="project" name="Maven: ch.qos.logback:logback-classic:1.4.8" />
-        <element id="library" level="project" name="Maven: ch.qos.logback:logback-core:1.4.8" />
         <element id="library" level="project" name="Maven: club.minnced:opus-java-api:1.1.1" />
         <element id="library" level="project" name="Maven: club.minnced:opus-java-natives:1.1.1" />
         <element id="library" level="project" name="Maven: club.minnced:opus-java:1.1.1" />
@@ -50,7 +45,6 @@
         <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.21" />
         <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:1.8.21" />
         <element id="library" level="project" name="Maven: io.smallrye.common:smallrye-common-expression:2.2.0" />
-        <element id="library" level="project" name="Maven: org.jetbrains:annotations:13.0" />
         <element id="library" level="project" name="Maven: net.sf.trove4j:trove4j:3.0.3" />
         <element id="library" level="project" name="Maven: org.jsoup:jsoup:1.16.2" />
         <element id="library" level="project" name="Maven: org.mongodb:bson-record-codec:4.11.1" />
@@ -62,8 +56,26 @@
         <element id="library" level="project" name="Maven: org.mongodb:mongodb-driver-core:4.11.1" />
         <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:2.0.7" />
         <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.18.30" />
-        <element id="library" level="project" name="Maven: tech.xigam:CCH:1.7.0" />
         <element id="library" level="project" name="Maven: org.ow2.asm:asm:9.5" />
+        <element id="library" level="project" name="Maven: ch.qos.logback:logback-classic:1.4.14" />
+        <element id="library" level="project" name="Maven: ch.qos.logback:logback-core:1.4.14" />
+        <element id="library" level="project" name="Maven: tech.xigam:CCH:1.8.0" />
+        <element id="library" level="project" name="Maven: org.jetbrains:annotations:24.0.1" />
+        <element id="library" level="project" name="Maven: moe.seikimo:magix-data:1.0-SNAPSHOT" />
+        <element id="library" level="project" name="Maven: org.apache.commons:commons-collections4:4.4" />
+        <element id="library" level="project" name="Maven: de.bwaldvogel:mongo-java-server-h2-backend:1.44.0" />
+        <element id="library" level="project" name="Maven: de.kherud:llama:2.3.5" />
+        <element id="library" level="project" name="Maven: org.javassist:javassist:3.28.0-GA" />
+        <element id="library" level="project" name="Maven: org.reflections:reflections:0.10.2" />
+        <element id="library" level="project" name="Maven: systems.manifold:manifold-ext:2024.1.1" />
+        <element id="library" level="project" name="Maven: systems.manifold:manifold-ext-rt:2024.1.1" />
+        <element id="library" level="project" name="Maven: systems.manifold:manifold-rt:2024.1.1" />
+        <element id="library" level="project" name="Maven: systems.manifold:manifold-util:2024.1.1" />
+        <element id="library" level="project" name="Maven: systems.manifold:manifold:2024.1.1" />
+        <element id="library" level="project" name="Maven: com.neovisionaries:nv-websocket-client:2.14" />
+      </element>
+      <element id="archive" name="Magix-Bot.jar">
+        <element id="module-output" name="Magix-Bot" />
       </element>
     </root>
   </artifact>
