@@ -33,6 +33,11 @@ public final class StarInteraction extends Command {
         }
 
         var sender = message.getAuthor();
+        if (sender.isBot() || sender.isSystem()) {
+            interaction.reply(EmbedUtils.error("You can't star non-user messages!"));
+            return;
+        }
+
         var embed = new EmbedBuilder()
                 .setTitle("Starred by " + interaction.getUser().getEffectiveName())
                 .setDescription(message.getContentRaw())
