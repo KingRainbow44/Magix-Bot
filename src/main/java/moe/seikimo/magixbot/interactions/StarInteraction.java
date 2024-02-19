@@ -36,6 +36,7 @@ public final class StarInteraction extends Command {
         var embed = new EmbedBuilder()
                 .setTitle("Starred by " + interaction.getUser().getEffectiveName())
                 .setDescription(message.getContentRaw())
+                .addField("Original Message", message.getJumpUrl(), false)
                 .setTimestamp(OffsetDateTime.now())
                 .setFooter(sender.getEffectiveName(), sender.getEffectiveAvatarUrl())
                 .setColor(EmbedUtils.getColor());
