@@ -7,6 +7,7 @@ import moe.seikimo.magixbot.data.DatabaseManager;
 import moe.seikimo.magixbot.features.game.GameManager;
 import moe.seikimo.magixbot.listeners.GameListener;
 import moe.seikimo.magixbot.listeners.GenericListener;
+import moe.seikimo.magixbot.utils.EmbedUtils;
 import moe.seikimo.magixbot.utils.JDAUtils;
 import moe.seikimo.magixbot.utils.ReflectionUtils;
 import net.dv8tion.jda.api.JDA;
@@ -94,6 +95,10 @@ public final class MagixBot {
         this.commandHandler.setPrefix(commands.prefix());
         this.commandHandler.setJda(this.botInstance);
         this.commandHandler.mentionDefault = false;
+        this.commandHandler.onArgumentError = (interaction) ->
+                interaction.reply(EmbedUtils.error("Invalid arguments."));
+        this.commandHandler.onContextError = (interaction, error) ->
+                interaction.reply(EmbedUtils.error(error.getMessage()));
 
         // Register commands.
         ReflectionUtils.getAllCommands().forEach(command -> {
