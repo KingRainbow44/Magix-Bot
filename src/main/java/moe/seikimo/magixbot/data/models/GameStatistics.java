@@ -1,9 +1,10 @@
-package moe.seikimo.magixbot.features.game;
+package moe.seikimo.magixbot.data.models;
 
+import dev.morphia.annotations.Entity;
 import lombok.Data;
-import moe.seikimo.magixbot.data.models.MemberModel;
 
 @Data
+@Entity
 public final class GameStatistics {
     private transient MemberModel member;
 
