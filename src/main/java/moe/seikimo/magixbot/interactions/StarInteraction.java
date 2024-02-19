@@ -50,7 +50,7 @@ public final class StarInteraction extends Command {
 
         var starboardChannel = guild.getData().getStarboardChannel();
         starboardChannel.sendMessageEmbeds(embed.build()).queue(newMessage ->
-                interaction.reply(EmbedUtils.info("Message starred at " + newMessage.getJumpUrl() + ".")));
+                interaction.reply(EmbedUtils.info("Message starred at " + newMessage.getJumpUrl())));
     }
 
     @Override
