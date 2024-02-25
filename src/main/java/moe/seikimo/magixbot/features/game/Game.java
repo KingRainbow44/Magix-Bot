@@ -9,6 +9,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Predicate;
 
 @Getter
 @RequiredArgsConstructor
@@ -86,5 +87,21 @@ public abstract class Game extends ListenerAdapter {
      */
     public final Guild getGuild() {
         return this.context.guild();
+    }
+
+    /**
+     * Gets a random member from the game.
+     *
+     * @return A random member.
+     */
+    @SafeVarargs
+    protected final Member getRandomMember(Predicate<Member>... filters) {
+        var members = this.getPlayers().stream();
+        for (var filter : filters) {
+            members = members.filter(filter);
+        }
+
+        var list = members.toList();
+        return list.get((int) (Math.random() * list.size()));
     }
 }

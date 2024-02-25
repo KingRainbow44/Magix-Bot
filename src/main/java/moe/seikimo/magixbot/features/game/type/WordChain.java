@@ -3,9 +3,9 @@ package moe.seikimo.magixbot.features.game.type;
 import moe.seikimo.magixbot.features.game.Game;
 import moe.seikimo.magixbot.features.game.GameContext;
 import moe.seikimo.magixbot.utils.EmbedUtils;
+import moe.seikimo.magixbot.utils.GameUtils;
 import moe.seikimo.magixbot.utils.ThreadUtils;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.channel.ChannelType;
 import net.dv8tion.jda.api.entities.channel.attribute.IThreadContainer;
 import net.dv8tion.jda.api.entities.channel.concrete.ThreadChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -33,12 +33,12 @@ public final class WordChain extends Game {
 
     @Override
     public void start() {
-        super.start();
-
         // Create a private thread for the game.
         if (!(this.getChannel() instanceof IThreadContainer threadChannel)) {
             throw new IllegalStateException("Channel is not a guild text channel!");
         }
+
+        super.start();
 
         // Assign a starting player.
         this.remaining.addAll(this.getPlayers());
@@ -115,18 +115,13 @@ public final class WordChain extends Game {
     }
 
     @Override
+    @SuppressWarnings("DataFlowIssue")
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
-        if (!event.isFromGuild() || !event.isFromThread()) return;
-        if (event.getChannelType() != ChannelType.GUILD_PRIVATE_THREAD) return;
+        if (!GameUtils.canContinue(this.thread.getId(), event)) return;
 
-        var channel = event.getChannel().asThreadChannel();
         var member = event.getMember();
-
-        if (member == null) return;
-        if (!channel.getId().equals(this.thread.getId())) return;
-
+        var channel = event.getChannel().asThreadChannel();
         var message = event.getMessage().getContentRaw();
-        if (message.isBlank()) return;
 
         if (member.getId().equals(this.going.getId())) {
             this.timer = 0;
@@ -148,19 +143,6 @@ public final class WordChain extends Game {
         } else {
             event.getMessage().delete().queue();
         }
-    }
-
-    /**
-     * Gets a random member from the game.
-     *
-     * @return A random member.
-     */
-    private Member getRandomMember() {
-        var members = this.getPlayers().stream()
-                .filter(member -> !this.hasGone.contains(member))
-                .filter(this.remaining::contains)
-                .toList();
-        return members.get((int) (Math.random() * members.size()));
     }
 
     /**
@@ -186,5 +168,15 @@ public final class WordChain extends Game {
                 EmbedUtils.error(toEliminate.getAsMention() + " has been eliminated!"),
                 EmbedUtils.info(this.going.getAsMention() + " you are up!")
         ).complete();
+    }
+
+    /**
+     * @return A random member that hasn't played.
+     */
+    private Member getRandomMember() {
+        return super.getRandomMember(
+                member -> !this.hasGone.contains(member),
+                this.remaining::contains
+        );
     }
 }

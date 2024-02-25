@@ -28,6 +28,19 @@ public interface EmbedUtils {
     }
 
     /**
+     * Creates a basic success embed.
+     *
+     * @param content The content of the embed.
+     * @return The embed.
+     */
+    static MessageEmbed success(String content) {
+        return new EmbedBuilder()
+                .setColor(0x7CFF55)
+                .setDescription(content)
+                .build();
+    }
+
+    /**
      * Creates a basic error embed.
      *
      * @param content The content of the embed.

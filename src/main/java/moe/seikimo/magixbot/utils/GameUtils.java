@@ -3,6 +3,8 @@ package moe.seikimo.magixbot.utils;
 import moe.seikimo.magixbot.features.game.Game;
 import moe.seikimo.magixbot.features.game.GameManager;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.channel.ChannelType;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import tech.xigam.cch.utils.Interaction;
 
 public interface GameUtils {
@@ -79,5 +81,20 @@ public interface GameUtils {
         }
 
         return true;
+    }
+
+    /**
+     * Basic checks for a game interaction.
+     *
+     * @param threadId The thread ID.
+     * @param event The event.
+     * @return True if the interaction is valid, false otherwise.
+     */
+    static boolean canContinue(String threadId, MessageReceivedEvent event) {
+        if (!event.isFromGuild() || !event.isFromThread()) return false;
+        if (event.getChannelType() != ChannelType.GUILD_PRIVATE_THREAD) return false;
+        if (event.getMember() == null) return false;
+        if (!event.getChannel().getId().equals(threadId)) return false;
+        return !event.getMessage().getContentRaw().isBlank();
     }
 }
