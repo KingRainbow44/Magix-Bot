@@ -26,6 +26,13 @@ public final class StarInteraction extends Command {
             return;
         }
 
+        // Check if starboard channel exists.
+        var channel = guild.getData().getStarboardChannel();
+        if (channel == null) {
+            interaction.reply(EmbedUtils.error("Starboard channel not set."));
+            return;
+        }
+
         var message = interaction.getMessage();
         if (message == null) {
             interaction.reply(EmbedUtils.error("Invalid message."));
@@ -54,8 +61,7 @@ public final class StarInteraction extends Command {
             }
         }
 
-        var starboardChannel = guild.getData().getStarboardChannel();
-        starboardChannel.sendMessageEmbeds(embed.build()).queue(newMessage ->
+        channel.sendMessageEmbeds(embed.build()).queue(newMessage ->
                 interaction.reply(EmbedUtils.info("Message starred at " + newMessage.getJumpUrl())));
     }
 
