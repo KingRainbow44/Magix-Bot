@@ -81,6 +81,13 @@ public final class GuildAudioRecorder implements AudioReceiveHandler {
     }
 
     /**
+     * Closes the audio receiver.
+     */
+    public void close() {
+        this.audioFrames.clear();
+    }
+
+    /**
      * Combines two byte arrays.
      *
      * @return The combined byte array.
