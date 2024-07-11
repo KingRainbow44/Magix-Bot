@@ -7,6 +7,8 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -101,7 +103,8 @@ public abstract class Game extends ListenerAdapter {
             members = members.filter(filter);
         }
 
-        var list = members.toList();
-        return list.get((int) (Math.random() * list.size()));
+        var list = new ArrayList<>(members.toList());
+        Collections.shuffle(list);
+        return list.get(0);
     }
 }
