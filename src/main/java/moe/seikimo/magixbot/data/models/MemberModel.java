@@ -10,14 +10,14 @@ import lombok.Data;
 public final class MemberModel {
     private transient GuildModel guild;
 
-    private GameStatistics gameStats;
+    private GameStatistics gameStats = new GameStatistics();
+
+    public MemberModel() {
+        this.onLoad();
+    }
 
     @PostLoad
     public void onLoad() {
-        if (this.getGameStats() == null) {
-            this.setGameStats(new GameStatistics());
-        }
-
         this.getGameStats().setMember(this);
     }
 

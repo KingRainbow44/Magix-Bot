@@ -2,13 +2,16 @@ package moe.seikimo.magixbot.data.models;
 
 import dev.morphia.annotations.Entity;
 import lombok.Data;
+import moe.seikimo.magixbot.data.annotations.Game;
 
 @Data
 @Entity
 public final class GameStatistics {
     private transient MemberModel member;
 
+    @Game(name = "Word Chain")
     private int wordChainWins = 0;
+    @Game(name = "Wordle")
     private int wordleWins = 0;
 
     /**
