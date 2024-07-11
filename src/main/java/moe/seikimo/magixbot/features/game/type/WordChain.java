@@ -9,14 +9,17 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.channel.attribute.IThreadContainer;
 import net.dv8tion.jda.api.entities.channel.concrete.ThreadChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.utils.FileUpload;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public final class WordChain extends Game {
     public static final String GAME_ID = "word-chain";
 
+    private boolean isRunning = false;
     private ThreadChannel thread;
 
     private Member going;
@@ -63,7 +66,7 @@ public final class WordChain extends Game {
 
         // Send a message to the thread.
         thread.sendMessageEmbeds(
-                EmbedUtils.info("The game will start in 10s. Get ready!"),
+                EmbedUtils.info("The game will start in 5s. Get ready!"),
                 EmbedUtils.info("The player starting is " + this.going.getAsMention() + ".")
         ).queue();
     }
@@ -76,9 +79,13 @@ public final class WordChain extends Game {
             var winner = this.remaining.get(0);
             this.thread.sendMessageEmbeds(
                     EmbedUtils.error("The game has ended!"),
-                    EmbedUtils.info("The winner is " + winner.getAsMention() + "!"),
-                    EmbedUtils.info("The word chain was: " + String.join(", ", this.wordChain))
+                    EmbedUtils.info("The winner is " + winner.getAsMention() + "!")
             ).queue();
+
+            var wordChain = String.join(", ", this.wordChain);
+            // Upload the word chain as a text file.
+            this.thread.sendFiles(FileUpload.fromData(
+                    wordChain.getBytes(), "final-chain.txt")).complete();
 
             this.thread.getManager()
                     .setArchived(true)
@@ -93,10 +100,11 @@ public final class WordChain extends Game {
 
     @Override
     protected void run() {
-        // Wait 10s for players to join.
-        ThreadUtils.sleep(10e3);
+        // Wait 5s for players to join.
+        ThreadUtils.sleep(5e3);
 
         // Start the game.
+        this.isRunning = true;
         this.thread.sendMessageEmbeds(
                 EmbedUtils.info("The game is running!")
         ).complete();
@@ -119,9 +127,27 @@ public final class WordChain extends Game {
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
         if (!GameUtils.canContinue(this.thread.getId(), event)) return;
 
+        // Check if Brittany is sending messages before the game starts.
+        if (!this.isRunning || !this.isRunning()) {
+            event.getMessage().delete().queue();
+            return;
+        }
+
         var member = event.getMember();
         var channel = event.getChannel().asThreadChannel();
         var message = event.getMessage().getContentRaw();
+
+        // Check if the message contains any words which have already been used.
+        var words = this.wordChain.stream()
+                .map(str -> str.split(" "))
+                .flatMap(Arrays::stream)
+                .toList();
+        var split = Arrays.stream(message.split(" ")).toList();
+        if (words.stream().anyMatch(split::contains)) {
+            // Eliminate the player.
+            this.eliminatePlayer(member);
+            return;
+        }
 
         if (member.getId().equals(this.going.getId())) {
             this.timer = 0;
@@ -133,6 +159,10 @@ public final class WordChain extends Game {
                 this.hasGone.clear();
             }
 
+            // Decrease the time.
+            if (this.seconds > 3) {
+                this.seconds -= 0.1f;
+            }
             // Get the next player.
             this.going = this.getRandomMember();
 
