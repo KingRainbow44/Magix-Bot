@@ -19,6 +19,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.utils.FileUpload;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.List;
@@ -108,6 +109,14 @@ public final class Wordle extends Game {
                 ).queue();
             }
 
+            // Reveal answer words.
+            this.states.forEach((member, state) ->
+                    this.thread.sendMessageEmbeds(
+                            EmbedUtils.info("%s's word was: %s".formatted(
+                                    member.getAsMention(), state.word.answer))
+                    ).queue()
+            );
+
             // Archive and lock the thread.
             this.thread.getManager()
                     .setArchived(true)
@@ -152,10 +161,7 @@ public final class Wordle extends Game {
                         
                         Wordle is where you guess a 5 letter word in 6 guesses.
                         You and your opponent will take turns guessing words.
-                        The player starting is %s.
-                        %s, %s""".formatted(this.going.getAsMention(),
-                        this.states.get(this.going).word,
-                        this.states.get(this.getOtherMember()).word))
+                        The player starting is %s.""".formatted(this.going.getAsMention()))
         ).queue();
     }
 
