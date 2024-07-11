@@ -13,9 +13,10 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Data
-@Entity("guilds")
+@Entity(value = "guilds", useDiscriminator = false)
 public final class GuildModel implements DatabaseObject<GuildModel> {
     @Id private String guildId;
 
@@ -49,8 +50,12 @@ public final class GuildModel implements DatabaseObject<GuildModel> {
 
         // Set transient references.
         this.setGuild(JDAUtils.getGuild(this.getGuildId()));
-        this.setStarboardChannel(this.getGuild()
-                .getTextChannelById(this.getStarboardChannelId()));
+
+        var starboardChannel = this.getStarboardChannelId();
+        if (starboardChannel != null) {
+            var channel = this.getGuild().getTextChannelById(starboardChannel);
+            this.setStarboardChannel(Objects.requireNonNull(channel));
+        }
     }
 
     @Override
