@@ -2,6 +2,7 @@ package moe.seikimo.magixbot.features.game;
 
 import lombok.Getter;
 import moe.seikimo.magixbot.features.game.type.WordChain;
+import moe.seikimo.magixbot.features.game.type.WordHunt;
 import moe.seikimo.magixbot.features.game.type.Wordle;
 import net.dv8tion.jda.api.entities.Guild;
 import tech.xigam.cch.utils.Interaction;
@@ -21,9 +22,11 @@ public final class GameManager {
     public static void initialize() {
         games.put(WordChain.GAME_ID, WordChain.class);
         games.put(Wordle.GAME_ID, Wordle.class);
+        games.put(WordHunt.GAME_ID, WordHunt.class);
 
         gameNames.put(WordChain.GAME_ID, "Word Chain");
         gameNames.put(Wordle.GAME_ID, "Wordle");
+        gameNames.put(WordHunt.GAME_ID, "Word Hunt");
     }
 
     /**

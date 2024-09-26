@@ -26,6 +26,9 @@ public final class MagixBot {
     static {
         // Set Logback configuration.
         System.setProperty("logback.configurationFile", "logback.xml");
+
+        // Load native libraries.
+        System.loadLibrary("word_hunt");
     }
 
     @Getter private static final Logger logger
@@ -62,6 +65,9 @@ public final class MagixBot {
         try {
             // Start the bot.
             this.start();
+
+            // NATIVE - Call native initializers.
+            this.loadWords("hunt/words.txt");
 
             // Initialize systems.
             DatabaseManager.initialize();
@@ -106,4 +112,11 @@ public final class MagixBot {
             MagixBot.getLogger().debug("Registered command: '{}'", command.getLabel());
         });
     }
+
+    /**
+     * Loads all Scrabble! words.
+     *
+     * @param dictionaryPath The path to the dictionary.
+     */
+    private native void loadWords(String dictionaryPath);
 }

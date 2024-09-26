@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 
 import java.awt.*;
+import java.util.concurrent.TimeUnit;
 
 public interface EmbedUtils {
     /**
@@ -51,5 +52,16 @@ public interface EmbedUtils {
                 .setColor(0xfc5e53)
                 .setDescription(content)
                 .build();
+    }
+
+    /**
+     * Creates a relative Discord timestamp string.
+     *
+     * @param amount The amount of time.
+     * @param units The time unit.
+     * @return The relative time string.
+     */
+    static String relativeTime(int amount, TimeUnit units) {
+        return "<t:" + (System.currentTimeMillis() / 1000 + units.toSeconds(amount)) + ":R>";
     }
 }
