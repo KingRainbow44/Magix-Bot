@@ -43,7 +43,15 @@ public final class CreateSubCommand extends SubCommand implements Completable, A
             interaction.reply(EmbedUtils.error("The game type you specified does not exist."));
         } else {
             game.addPlayer(member);
-            interaction.reply(EmbedUtils.info("The game has been created."));
+
+            if (game.getContext().detached()) {
+                interaction
+                        .setEphemeral()
+                        .sendMessage(EmbedUtils.info("The game has been created."))
+                        .reply(EmbedUtils.info("This game is detached. Please manage it in its thread!"));
+            } else {
+                interaction.reply(EmbedUtils.info("The game has been created."));
+            }
         }
     }
 

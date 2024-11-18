@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import tech.xigam.cch.utils.Interaction;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -59,8 +60,10 @@ public abstract class Game extends ListenerAdapter {
     public void stop(boolean force) {
         this.running = false;
 
-        // Remove the game from the manager.
-        GameManager.getRunning().remove(this.context.guild());
+        if (!this.getContext().detached()) {
+            // Remove the game from the manager.
+            GameManager.getRunning().remove(this.context.guild());
+        }
     }
 
     /**
@@ -68,6 +71,16 @@ public abstract class Game extends ListenerAdapter {
      */
     protected void run() {
 
+    }
+
+    /**
+     * Invoked when the game is created.
+     * Detached games are unable to start, so this method will be used instead.
+     *
+     * @param interaction The interaction that triggered the game.
+     */
+    public void onCreation(Interaction interaction) {
+        // A detached game should likely call start() here.
     }
 
     /**

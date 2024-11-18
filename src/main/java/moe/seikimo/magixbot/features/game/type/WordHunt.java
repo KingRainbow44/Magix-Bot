@@ -14,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 public final class WordHunt extends Game {
     public static final String GAME_ID = "word-hunt";
+    public static final boolean DETACHED = true;
 
     private final Map<Member, List<String>> guesses = new ConcurrentHashMap<>();
 
