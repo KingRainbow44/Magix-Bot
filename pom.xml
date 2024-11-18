@@ -14,14 +14,24 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <project.versions.lombok>1.18.34</project.versions.lombok>
+
+        <project.versions.jda>b1f4dc91e2</project.versions.jda>
+        <project.versions.cch>1.9.0-SNAPSHOT</project.versions.cch>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>jitpack</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <!-- Discord API -->
         <dependency>
-            <groupId>net.dv8tion</groupId>
+            <groupId>io.github.JDA-Fork</groupId>
             <artifactId>JDA</artifactId>
-            <version>5.0.0</version>
+            <version>${project.versions.jda}</version>
 
             <exclusions>
                 <exclusion>
@@ -34,7 +44,7 @@
         <dependency>
             <groupId>tech.xigam</groupId>
             <artifactId>CCH</artifactId>
-            <version>1.8.0</version>
+            <version>${project.versions.cch}</version>
         </dependency>
 
         <!-- Utilities -->
