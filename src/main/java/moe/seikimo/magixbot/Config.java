@@ -86,6 +86,12 @@ public final class Config {
     @Getter
     @Accessors(fluent = true)
     public static class Database {
+        private boolean useLocal = true;
+
+        /** This is only used when 'useLocal' is false. */
+        private String uri = "mongodb://localhost:27017";
+
+        /** This is only used when 'useLocal' is true. */
         private int port = 27018;
     }
 

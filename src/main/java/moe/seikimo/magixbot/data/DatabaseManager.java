@@ -8,9 +8,6 @@ import dev.morphia.Morphia;
 import lombok.Getter;
 import moe.seikimo.data.DatabaseUtils;
 import moe.seikimo.magixbot.Config;
-import org.bson.UuidRepresentation;
-
-import java.util.List;
 
 public final class DatabaseManager {
     @Getter private static DatabaseManager instance;
@@ -30,11 +27,17 @@ public final class DatabaseManager {
         if (DatabaseManager.instance != null)
             throw new RuntimeException("DatabaseManager is already initialized.");
 
-        this.server = new MongoServer(new H2Backend("database.db"));
-        this.server.bind("127.0.0.1", Config.get().getDatabase().port());
+        var config = Config.get().getDatabase();
+        if (config.useLocal()) {
+            this.server = new MongoServer(new H2Backend("database.db"));
+            this.server.bind("127.0.0.1", config.port());
+        } else {
+            this.server = null;
+        }
 
         // Create a morphia datastore.
-        var client = MongoClients.create(this.server.getConnectionString());
+        var client = MongoClients.create(config.useLocal() ?
+                this.server.getConnectionString() : config.uri());
         this.datastore = Morphia.createDatastore(client);
         DatabaseUtils.DATASTORE.set(this.datastore);
     }
