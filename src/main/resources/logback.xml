@@ -19,7 +19,7 @@
         </encoder>
     </appender>
 
-    <logger name="net.dv8tion" level="OFF" />
+    <logger name="net.dv8tion" level="ERROR" />
     <logger name="org.mongodb.driver" level="OFF" />
     <logger name="dev.morphia" level="OFF" />
     <logger name="de.bwaldvogel" level="OFF" />

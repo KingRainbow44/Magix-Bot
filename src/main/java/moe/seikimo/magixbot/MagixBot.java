@@ -101,10 +101,22 @@ public final class MagixBot {
         this.commandHandler.setPrefix(commands.prefix());
         this.commandHandler.setJda(this.botInstance);
         this.commandHandler.mentionDefault = false;
+
         this.commandHandler.onArgumentError = (interaction) ->
                 interaction.reply(EmbedUtils.error("Invalid arguments."));
         this.commandHandler.onContextError = (interaction, error) ->
                 interaction.reply(EmbedUtils.error(error.getMessage()));
+
+        this.commandHandler.onExecutionError = (interaction, error) -> {
+            interaction.reply(EmbedUtils.error("An error occurred."));
+            MagixBot.getLogger().warn("An error occurred while executing a command.", error);
+        };
+        this.commandHandler.onCompletionError = (interaction, error) ->
+                MagixBot.getLogger().warn("An error occurred while completing a command.", error);
+        this.commandHandler.onCallbackError = (interaction, error) -> {
+            interaction.reply(EmbedUtils.error("An error occurred."));
+            MagixBot.getLogger().warn("An error occurred while executing a command.", error);
+        };
 
         // Register commands.
         ReflectionUtils.getAllCommands().forEach(command -> {
