@@ -38,7 +38,7 @@ public final class DatabaseManager {
         // Create a morphia datastore.
         var client = MongoClients.create(config.useLocal() ?
                 this.server.getConnectionString() : config.uri());
-        this.datastore = Morphia.createDatastore(client);
+        this.datastore = Morphia.createDatastore(client, "magixbot");
         DatabaseUtils.DATASTORE.set(this.datastore);
     }
 }
