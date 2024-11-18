@@ -25,7 +25,7 @@ public interface ReflectionUtils {
                     SubCommand.class.isAssignableFrom(commandClass)) continue;
             instances.add(commandClass.getDeclaredConstructor().newInstance());
         } catch (Exception exception) {
-            logger.warn("Unable to create an instance of " + commandClass.getName(), exception);
+            logger.warn("Unable to create an instance of {}", commandClass.getName(), exception);
         }
 
         return instances;
