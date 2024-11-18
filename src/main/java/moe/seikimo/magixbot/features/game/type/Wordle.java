@@ -2,8 +2,10 @@ package moe.seikimo.magixbot.features.game.type;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.experimental.ExtensionMethod;
 import moe.seikimo.general.FileUtils;
 import moe.seikimo.general.NumberUtils;
+import moe.seikimo.magixbot.extensions.MemberExtensions;
 import moe.seikimo.magixbot.features.game.Game;
 import moe.seikimo.magixbot.features.game.GameContext;
 import moe.seikimo.magixbot.utils.EmbedUtils;
@@ -25,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@ExtensionMethod(MemberExtensions.class)
 public final class Wordle extends Game {
     public static final String GAME_ID = "wordle";
 

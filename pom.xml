@@ -55,12 +55,6 @@
         </dependency>
 
         <dependency>
-            <groupId>systems.manifold</groupId>
-            <artifactId>manifold-ext</artifactId>
-            <version>2024.1.17</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
             <version>0.10.2</version>
@@ -104,19 +98,11 @@
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
                     <encoding>UTF-8</encoding>
-                    <compilerArgs>
-                        <arg>-Xplugin:Manifold</arg>
-                    </compilerArgs>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                             <version>1.18.30</version>
-                        </path>
-                        <path>
-                            <groupId>systems.manifold</groupId>
-                            <artifactId>manifold-ext</artifactId>
-                            <version>2024.1.1</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>

@@ -1,5 +1,7 @@
 package moe.seikimo.magixbot.features.game.type;
 
+import lombok.experimental.ExtensionMethod;
+import moe.seikimo.magixbot.extensions.MemberExtensions;
 import moe.seikimo.magixbot.features.game.Game;
 import moe.seikimo.magixbot.features.game.GameContext;
 import moe.seikimo.magixbot.utils.EmbedUtils;
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@ExtensionMethod(MemberExtensions.class)
 public final class WordChain extends Game {
     public static final String GAME_ID = "word-chain";
 

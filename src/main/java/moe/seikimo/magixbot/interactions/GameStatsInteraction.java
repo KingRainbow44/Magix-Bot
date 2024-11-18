@@ -1,7 +1,9 @@
 package moe.seikimo.magixbot.interactions;
 
+import lombok.experimental.ExtensionMethod;
 import moe.seikimo.magixbot.data.annotations.Game;
 import moe.seikimo.magixbot.data.models.GameStatistics;
+import moe.seikimo.magixbot.extensions.MemberExtensions;
 import moe.seikimo.magixbot.utils.EmbedUtils;
 import moe.seikimo.magixbot.utils.JDAUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -11,6 +13,7 @@ import tech.xigam.cch.utils.Interaction;
 
 import java.time.OffsetDateTime;
 
+@ExtensionMethod(MemberExtensions.class)
 public final class GameStatsInteraction extends Command {
     public GameStatsInteraction() {
         super("Fetch Game Statistics",

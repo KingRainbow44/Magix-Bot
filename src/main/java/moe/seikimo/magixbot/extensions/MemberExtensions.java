@@ -1,19 +1,18 @@
-package MagixBot.extensions.net.dv8tion.jda.api.entities.Member;
+package moe.seikimo.magixbot.extensions;
 
-import manifold.ext.rt.api.Extension;
-import manifold.ext.rt.api.This;
+import lombok.experimental.ExtensionMethod;
 import moe.seikimo.data.DatabaseUtils;
 import moe.seikimo.magixbot.data.models.MemberModel;
 import moe.seikimo.magixbot.data.models.UserModel;
 import moe.seikimo.magixbot.data.models.GameStatistics;
 import net.dv8tion.jda.api.entities.Member;
 
-@Extension
-public final class MemberExt {
+@ExtensionMethod(GuildExtensions.class)
+public final class MemberExtensions {
     /**
      * @return The user model, from the database or a new instance.
      */
-    public static UserModel getData(@This Member member) {
+    public static UserModel getData(Member member) {
         var data = DatabaseUtils.fetch(
                 UserModel.class, "userId", member.getId());
         if (data == null) {
@@ -27,7 +26,7 @@ public final class MemberExt {
     /**
      * @return The member model, from the database or a new instance.
      */
-    public static MemberModel getScopedData(@This Member member) {
+    public static MemberModel getScopedData(Member member) {
         var guild = member.getGuild();
         var data = guild.getData();
 
@@ -43,8 +42,8 @@ public final class MemberExt {
      *
      * @return The game statistics for the guild.
      */
-    public static GameStatistics getStats(@This Member member) {
-        var data = MemberExt.getScopedData(member);
+    public static GameStatistics getStats(Member member) {
+        var data = MemberExtensions.getScopedData(member);
         return data.getGameStats();
     }
 }

@@ -1,5 +1,7 @@
 package moe.seikimo.magixbot.commands.clip;
 
+import lombok.experimental.ExtensionMethod;
+import moe.seikimo.magixbot.extensions.GuildExtensions;
 import moe.seikimo.magixbot.features.clip.GuildAudioRecorder;
 import moe.seikimo.magixbot.utils.EmbedUtils;
 import tech.xigam.cch.command.SubCommand;
@@ -7,6 +9,7 @@ import tech.xigam.cch.utils.Interaction;
 
 import java.util.Objects;
 
+@ExtensionMethod(GuildExtensions.class)
 public final class StartSubCommand extends SubCommand {
     public StartSubCommand() {
         super("start", "Starts recording audio from a voice channel.");

@@ -1,5 +1,7 @@
 package moe.seikimo.magixbot.commands;
 
+import lombok.experimental.ExtensionMethod;
+import moe.seikimo.magixbot.extensions.GuildExtensions;
 import moe.seikimo.magixbot.utils.EmbedUtils;
 import moe.seikimo.magixbot.utils.JDAUtils;
 import net.dv8tion.jda.api.Permission;
@@ -15,6 +17,7 @@ import tech.xigam.cch.utils.Interaction;
 import java.util.Collection;
 import java.util.List;
 
+@ExtensionMethod(GuildExtensions.class)
 public final class StarboardCommand extends Command implements Arguments, Restricted {
     public StarboardCommand() {
         super("starboard", "Sets the starboard channel for the guild.");

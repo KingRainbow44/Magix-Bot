@@ -1,5 +1,7 @@
 package moe.seikimo.magixbot.interactions;
 
+import lombok.experimental.ExtensionMethod;
+import moe.seikimo.magixbot.extensions.GuildExtensions;
 import moe.seikimo.magixbot.utils.EmbedUtils;
 import moe.seikimo.magixbot.utils.JDAUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -9,6 +11,7 @@ import tech.xigam.cch.utils.Interaction;
 
 import java.time.OffsetDateTime;
 
+@ExtensionMethod(GuildExtensions.class)
 public final class StarInteraction extends Command {
     public StarInteraction() {
         super("Star Message", "Adds a message to the starboard.");
