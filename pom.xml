@@ -12,6 +12,8 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <project.versions.lombok>1.18.34</project.versions.lombok>
     </properties>
 
     <dependencies>
@@ -67,6 +69,12 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${project.versions.lombok}</version>
+        </dependency>
+
         <!-- Interfaces -->
         <dependency>
             <groupId>de.kherud</groupId>
@@ -102,7 +110,7 @@
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>1.18.30</version>
+                            <version>${project.versions.lombok}</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
