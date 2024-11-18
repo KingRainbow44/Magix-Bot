@@ -16,7 +16,7 @@
         <project.versions.lombok>1.18.34</project.versions.lombok>
 
         <project.versions.jda>b1f4dc91e2</project.versions.jda>
-        <project.versions.cch>1.9.0-SNAPSHOT</project.versions.cch>
+        <project.versions.cch>1.9.1-SNAPSHOT</project.versions.cch>
     </properties>
 
     <repositories>
