@@ -29,7 +29,7 @@ public final class GameStatsInteraction extends Command {
 
         var name = "Unknown";
         var gameStats = new GameStatistics();
-        var isLifetime = interaction.isFromGuild();
+        var isLifetime = !interaction.isFromGuild();
 
         if (interaction.isFromGuild()) {
             var guild = interaction.getGuild();
